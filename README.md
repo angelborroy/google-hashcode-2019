@@ -17,5 +17,7 @@ Running
 -------
 
 ```bash
-$ java -jar target/hashcode-2019-1.0.0.jar --fileIn=src/main/resources/in/a_example.in --engine=BASIC --fileOut=src/main/resources/out/a_example.out
+$ java -jar target/hashcode-2019-1.0.0.jar \
+  --fileIn=src/main/resources/in/a_example.in \
+  --fileOut=src/main/resources/out/a_example.out
 ```
