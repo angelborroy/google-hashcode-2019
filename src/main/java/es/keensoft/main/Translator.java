@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import es.keensoft.bean.Input;
@@ -22,17 +23,23 @@ public class Translator {
 		boolean firstLine = true;
 		List<Photo> photos = new ArrayList<Photo>();
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			int lineCount = 0;
 			for (String line; (line = br.readLine()) != null;) {
 				List<String> numbers = Arrays.asList(line.split(" "));
 				if (firstLine) {
 					input.setPhotosCount(Integer.parseInt(numbers.get(0)));
 					firstLine = false;
+					lineCount = 0;
 				} else {
 					Photo photo = new Photo();
+					photo.setId(lineCount);
 					photo.setVertical(numbers.get(0).equals("V"));
 					photo.setTagsCount(Integer.parseInt(numbers.get(1)));
-					photo.setTags(numbers.subList(2, numbers.size()));
+					HashSet<String> tags = new HashSet<String>();
+					tags.addAll(numbers.subList(2, numbers.size()));
+					photo.setTags(tags);
 					photos.add(photo);
+					lineCount++;
 				}
 			}
 		}
