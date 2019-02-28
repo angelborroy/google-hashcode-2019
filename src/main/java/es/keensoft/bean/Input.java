@@ -4,25 +4,24 @@ import java.util.List;
 
 public class Input {
 	
-	private List<String> firstLine;
-	private List<InputLine> inputLines;
-	
-	public List<String> getFirstLine() {
-		return firstLine;
+	private Integer photosCount;
+	private List<Photo> photos;
+	public Integer getPhotosCount() {
+		return photosCount;
 	}
-	public void setFirstLine(List<String> firstLine) {
-		this.firstLine = firstLine;
+	public void setPhotosCount(Integer photosCount) {
+		this.photosCount = photosCount;
 	}
-	public List<InputLine> getInputLines() {
-		return inputLines;
+	public List<Photo> getPhotos() {
+		return photos;
 	}
-	public void setInputLines(List<InputLine> inputLines) {
-		this.inputLines = inputLines;
+	public void setPhotos(List<Photo> photo) {
+		this.photos = photo;
 	}
-	
 	@Override
 	public String toString() {
-		return "Input [firstLine=" + firstLine + ", inputLines=" + inputLines + "]";
+		return "Input [photosCount=" + photosCount + ", photo=" + photos + "]";
 	}
+	
 	
 }

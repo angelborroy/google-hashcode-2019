@@ -4,28 +4,23 @@ import java.util.List;
 
 public class Output {
 
-	private List<String> firstLine;
-	private List<OutputLine> outputLines;
-
-	public List<String> getFirstLine() {
-		return firstLine;
+	private Integer slidesCount;
+	private List<List<Integer>> slidesLines;
+	public Integer getSlidesCount() {
+		return slidesCount;
 	}
-
-	public void setFirstLine(List<String> firstLine) {
-		this.firstLine = firstLine;
+	public void setSlidesCount(Integer slidesCount) {
+		this.slidesCount = slidesCount;
 	}
-
-	public List<OutputLine> getOutputLines() {
-		return outputLines;
+	public List<List<Integer>> getSlidesLines() {
+		return slidesLines;
 	}
-
-	public void setOutputLines(List<OutputLine> outputLines) {
-		this.outputLines = outputLines;
+	public void setSlidesLines(List<List<Integer>> slidesLines) {
+		this.slidesLines = slidesLines;
 	}
-
 	@Override
 	public String toString() {
-		return "Output [firstLine=" + firstLine + ", outputLines=" + outputLines + "]";
+		return "Output [slidesCount=" + slidesCount + ", slidesLine=" + slidesLines + "]";
 	}
 
 }

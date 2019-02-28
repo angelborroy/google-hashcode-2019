@@ -1,6 +1,8 @@
 package es.keensoft.main;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,8 +12,6 @@ import org.springframework.core.env.SimpleCommandLinePropertySource;
 
 import es.keensoft.bean.Input;
 import es.keensoft.bean.Output;
-import es.keensoft.main.engine.BasicStepEngine;
-import es.keensoft.util.Translator;
 
 /**
  * Main class to be launched from command line
@@ -32,8 +32,18 @@ public class Application implements CommandLineRunner {
 		Input in = Translator.getInput(inFile);
 
 		System.out.println(in);
-
-		Output output = BasicStepEngine.start(in);
+		
+		Output output = new Output();
+		output.setSlidesCount(2);
+		
+		List<List<Integer>> lines = new ArrayList<List<Integer>>();
+		List<Integer> line = new ArrayList<Integer>();
+		line.add(1);
+		line.add(2);
+		lines.add(line);
+		output.setSlidesLines(lines);
+		
+		System.out.println(output);
 
 		File outFile = new File(ps.getProperty("fileOut").toString());
 		Translator.writeOutput(output, outFile);
