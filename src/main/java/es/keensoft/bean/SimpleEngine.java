@@ -16,6 +16,7 @@ public class SimpleEngine {
 		while (usedIds.size() < photos.size()) {
 			int nextElement = scorePhoto(currentElement, photos);
 			currentElement = nextElement;
+			System.out.println(usedIds.size() + "/" + photos.size());
 		}
 		return output;
 		
@@ -79,13 +80,9 @@ public class SimpleEngine {
         List<String> common = new ArrayList<>(photo1.getTags());
         common.retainAll(photo2.getTags());
 
-        System.out.println(common);
-
         List<String> only1 = photo1.getTags().stream().filter(item -> !common.contains(item)).collect(Collectors.toList());
         List<String> only2 = photo2.getTags().stream().filter(item -> !common.contains(item)).collect(Collectors.toList());
 
-        System.out.println(only1);
-        System.out.println(only2);
         return Math.min(common.size(), Math.min(only1.size(), only2.size()));
         
     }
