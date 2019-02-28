@@ -62,7 +62,7 @@ public class SimpleEngine {
 	}
 	
 	private static Integer getBestOption(Photo photo1, List<Photo> photos) {
-		Integer maxValue = 0;
+		Integer maxValue = -1;
 		Integer maxPosition = -1;
 		for (int i = 0; i < photos.size(); i++) {
 			if (photo1.getId() != i && !usedIds.contains(i)) {
