@@ -1,10 +1,8 @@
 
-Google Hashcode 2019 Template
+Google Hashcode 2019
 =============================
 
-Sample template for [Google Hashcode 2019](https://hashcode.withgoogle.com/).
-
-Just an skeleton to start to work with.
+UST Global Official Team solution for [Google Hashcode 2019](https://hashcode.withgoogle.com/).
 
 Compiling
 ---------
@@ -18,6 +16,16 @@ Running
 
 ```bash
 $ java -jar target/hashcode-2019-1.0.0.jar \
-  --fileIn=src/main/resources/in/a_example.in \
-  --fileOut=src/main/resources/out/a_example.out
+  --fileIn=in/a_example.in \
+  --fileOut=a_example.out
+```
+
+Generating ZIP Source file
+--------------------------
+
+```bash
+$ ./zip.sh
+
+$ ls *.zip
+src.zip
 ```
