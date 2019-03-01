@@ -11,7 +11,7 @@ import org.springframework.core.env.SimpleCommandLinePropertySource;
 
 import es.keensoft.bean.Input;
 import es.keensoft.bean.Output;
-import es.keensoft.bean.SimpleEngine;
+import es.keensoft.engine.SimpleEngine;
 
 /**
  * Main class to be launched from command line
@@ -31,7 +31,7 @@ public class Application implements CommandLineRunner {
 		File inFile = new File(ps.getProperty("fileIn").toString());
 		Input in = Translator.getInput(inFile);
 
-		List<List<Integer>> slidesLines = SimpleEngine.scorePhotos(in.getPhotos());
+		List<List<Integer>> slidesLines = SimpleEngine.getSlideShow(in.getPhotos());
 		Output output = new Output();
 		output.setSlidesCount(slidesLines.size());
 		output.setSlidesLines(slidesLines);
