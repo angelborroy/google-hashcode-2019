@@ -15,8 +15,11 @@ import java.util.List;
 import es.keensoft.bean.Input;
 import es.keensoft.bean.Output;
 import es.keensoft.bean.Photo;
+import es.keensoft.engine.SimpleEngine;
 
 public class Translator {
+	
+	static Integer CURRENT_MAX_TAGS_COUNT = 0;
 
 	public static Input getInput(File file) throws Exception {
 		Input input = new Input();
@@ -39,9 +42,13 @@ public class Translator {
 					tags.addAll(numbers.subList(2, numbers.size()));
 					photo.setTags(tags);
 					photos.add(photo);
+					if (photo.getTagsCount() > CURRENT_MAX_TAGS_COUNT) {
+						CURRENT_MAX_TAGS_COUNT = photo.getTagsCount();
+					}
 					lineCount++;
 				}
 			}
+			SimpleEngine.STOP_PAIRING_H_VALUE = (CURRENT_MAX_TAGS_COUNT / 2);
 		}
 		input.setPhotos(photos);
 		return input;

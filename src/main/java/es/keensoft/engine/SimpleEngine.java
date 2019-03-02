@@ -28,14 +28,21 @@ public class SimpleEngine {
 	// Output format for the output file
 	static List<List<Integer>> output = new ArrayList<List<Integer>>();
 
-	// Criteria to stop searching vertical photos, this means that two vertical 
-	// photos have only 1 tag in common.
-	// Optimal would be 0
-	static Integer STOP_VALUE = 1;
+	// Criteria to stop pairing vertical photos, this means that two vertical 
+	// photos have only N tags in common.
+	// Optimal is 0
+	public static Integer STOP_PAIRING_V_VALUE = 0;
+	
+	// Criteria to stop pairing slides.
+	// Optimal is max(countTags) / 2 or upper
+	public static Integer STOP_PAIRING_H_VALUE = Integer.MAX_VALUE; 
 
 	// Compile a Slide Deck from a photo list
 	public static List<List<Integer>> getSlideShow(List<Photo> photos) {
 
+		System.out.println("V CRITERIA : " + STOP_PAIRING_V_VALUE);
+		System.out.println("H CRITERIA : " + STOP_PAIRING_H_VALUE);
+		
 		System.out.println("Compiling slides...");
 		initSlides(photos);
 		usedIds = new boolean[slides.size()];
@@ -68,7 +75,7 @@ public class SimpleEngine {
 							Integer value = compareVerticalPhoto(photos.get(i), photos.get(j));
 							if (value < minValue) {
 								minPosition = j;
-								if (value <= STOP_VALUE) {
+								if (value <= STOP_PAIRING_V_VALUE) {
 									break;
 								}
 							}
@@ -88,6 +95,14 @@ public class SimpleEngine {
 			}
 			System.out.println((i + 1) + "/" + photos.size());
 		}
+	}
+
+	// The more different the tag cloud, the better. As it will maximize results
+	// in slide comparison.
+	public static Integer compareVerticalPhoto(Taggable photo1, Taggable photo2) {
+		List<String> common = new ArrayList<>(photo1.getTags());
+		common.retainAll(photo2.getTags());
+		return common.size();
 	}
 
 	// Calculate next slide by getting best option scoring
@@ -112,6 +127,10 @@ public class SimpleEngine {
 				Integer value = compareSlide(slide, slides.get(i));
 				if (value > maxValue) {
 					maxPosition = i;
+					maxValue = value;
+				}
+				if (value >= STOP_PAIRING_H_VALUE) {
+					return maxPosition;
 				}
 			}
 		}
@@ -130,13 +149,5 @@ public class SimpleEngine {
 		return Math.min(common.size(), Math.min(only1.size(), only2.size()));
 
 	}
-
-	// The more different the tag cloud, the better. As it will maximize results
-	// in slide comparison.
-	public static Integer compareVerticalPhoto(Taggable photo1, Taggable photo2) {
-		List<String> common = new ArrayList<>(photo1.getTags());
-		common.retainAll(photo2.getTags());
-		return common.size();
-	}
-
+	
 }
