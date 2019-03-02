@@ -21,7 +21,7 @@ C - Memorable moments      1,472
 D - Pet pictures         401,434
 E - Shiny selfies        406,415
 ----------------------------------
-Total score 			     1,011,892
+Total score            1,011,892
 ```
 
 Compiling
