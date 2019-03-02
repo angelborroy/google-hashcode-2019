@@ -15,11 +15,11 @@ UST Global Official Team solution for [Google Hashcode 2019](https://hashcode.wi
 **Scoring**
 
 ```
-A - Example					           2
-B - Lovely landscapes	   202,569
-C - Memorable moments		   1,472
-D - Pet pictures		     401,434
-E - Shiny selfies		     406,415
+A - Example                    2
+B - Lovely landscapes    202,569
+C - Memorable moments      1,472
+D - Pet pictures         401,434
+E - Shiny selfies        406,415
 ----------------------------------
 Total score 			     1,011,892
 ```
