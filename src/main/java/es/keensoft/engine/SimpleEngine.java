@@ -12,8 +12,11 @@ import es.keensoft.bean.Taggable;
 /**
  * Simple Engine to compile Slide Show Deck.
  * 
- * 1. Create slides from vertical photos using a Tag Difference criteria 
- * 2. Compile the deck by using Google Scoring Algorithm
+ * 1. Compile slides from Vertical Photos finding tags clouds 
+ *    without common strings or with the minimal common strings
+ * 2. Take first slide and find the first one returning 
+ *    the max value for Google formula
+ * 3. Continue iterating till no more slides left
  *
  */
 public class SimpleEngine {
@@ -34,7 +37,7 @@ public class SimpleEngine {
 	public static Integer STOP_PAIRING_V_VALUE = 0;
 	
 	// Criteria to stop pairing slides.
-	// Optimal is max(countTags) / 2 or upper
+	// Optimal is "max(countTags) / 2" or upper
 	public static Integer STOP_PAIRING_H_VALUE = Integer.MAX_VALUE; 
 
 	// Compile a Slide Deck from a photo list

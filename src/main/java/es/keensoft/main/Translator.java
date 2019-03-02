@@ -17,10 +17,15 @@ import es.keensoft.bean.Output;
 import es.keensoft.bean.Photo;
 import es.keensoft.engine.SimpleEngine;
 
+/**
+ * Translate files into beans and reverse.
+ */
 public class Translator {
 	
+	// Calculate MAX Tags Count to provide a limit in pairing algorithm
 	static Integer CURRENT_MAX_TAGS_COUNT = 0;
 
+	// Obtain Input Bean from Input File
 	public static Input getInput(File file) throws Exception {
 		Input input = new Input();
 		boolean firstLine = true;
@@ -54,6 +59,7 @@ public class Translator {
 		return input;
 	}
 
+	// Write Output File from Output Bean
 	public static void writeOutput(Output output, File outFile) throws Exception {
 		try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile)))) {
 			writer.write("" + output.getSlidesCount() + "\n");
