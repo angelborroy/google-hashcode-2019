@@ -3,7 +3,6 @@ package es.keensoft.engine;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import es.keensoft.bean.Photo;
 import es.keensoft.bean.Slide;
@@ -38,8 +37,8 @@ public class SimpleEngine {
 	
 	// Criteria to stop pairing slides.
 	// Optimal is "max(countTags) / 2" or upper
-	public static Integer STOP_PAIRING_H_VALUE = Integer.MAX_VALUE; 
-
+	public static Integer STOP_PAIRING_H_VALUE = Integer.MAX_VALUE;
+	
 	// Compile a Slide Deck from a photo list
 	public static List<List<Integer>> getSlideShow(List<Photo> photos) {
 
@@ -58,6 +57,7 @@ public class SimpleEngine {
 			currentElement = nextElement;
 			System.out.println(++count + "/" + slides.size());
 		}
+		
 		return output;
 
 	}
@@ -126,7 +126,7 @@ public class SimpleEngine {
 		Integer maxValue = -1;
 		Integer maxPosition = -1;
 		for (int i = 0; i < slides.size(); i++) {
-			if (slide.getId() != i && !usedIds[i]) {
+			if (!usedIds[i]) {
 				Integer value = compareSlide(slide, slides.get(i));
 				if (value > maxValue) {
 					maxPosition = i;
@@ -143,13 +143,17 @@ public class SimpleEngine {
 	// Scoring algorithm from Google Problem Statement
 	public static Integer compareSlide(Taggable slide1, Taggable slide2) {
 
+		int countSlide1 = slide1.getTags().size();
+		int countSlide2 = slide2.getTags().size();
+		
 		List<String> common = new ArrayList<>(slide1.getTags());
 		common.retainAll(slide2.getTags());
 
-		List<String> only1 = slide1.getTags().stream().filter(item -> !common.contains(item)).collect(Collectors.toList());
-		List<String> only2 = slide2.getTags().stream().filter(item -> !common.contains(item)).collect(Collectors.toList());
+		int countCommon = common.size();
+		int countOnly1 = countSlide1 - countCommon;
+		int countOnly2 = countSlide2 - countCommon;
 
-		return Math.min(common.size(), Math.min(only1.size(), only2.size()));
+		return Math.min(common.size(), Math.min(countOnly1, countOnly2));
 
 	}
 	
